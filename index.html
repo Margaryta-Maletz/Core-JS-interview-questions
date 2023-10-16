@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>JS questions</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Core JS</h1>
+					<h2>best practices</h2>
+					<h3>вопросы с интервью</h3>
+					<p>
+						<small>Created by <a href="https://github.com/Margaryta-Maletz">Маргарита Малец</a></small>
+					</p>
+				</section>
+				<section>
+					<h2>Agenda</h2>
+					<ul>
+						<li>Data Types, Auto Type Conversions</li>
+						<li>Destructuring</li>
+						<li>Closures, Currying, Recursion</li>
+						<li>Async JavaScript (Timers, Promise, Event Loop)</li>
+						<li>Client Side JavaScript</li>
+					</ul>
+				</section>
+				<section>
+					<section>
+						<h2>Data Types,</br>Auto Type Conversions</h2>
+					</section>
+					<section>
+						<h3 data-id="code-title">Data Types</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							Number
+							String
+							Boolean
+							null
+							undefined
+							Symbol
+							Bigint
+							Object
+						</code></pre>
+						<p>Типы данных <a href="https://learn.javascript.ru/types">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">typeof</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							console.log(typeof `hello`); //
+							console.log(typeof 5); //
+							console.log(typeof []); //
+							console.log(typeof null); //
+							console.log(typeof NaN); //
+							console.log(typeof (() => {})); //
+							console.log(typeof typeof 5); //
+						</code></pre>
+					</section>
+					<section>
+						<h3 data-id="code-title">AUTO TYPE CONVERSIONS</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							console.log('' + 10 + 0); //
+							console.log('' - 10 + 0); //
+							console.log(6 / '3'); //
+							console.log('2' * '3'); //
+							console.log(4 + 5 + 'px'); //
+							console.log('$' + 4 + 5); //
+							console.log('4' - 2); //
+							console.log('4px' - 2); //
+							console.log(' -4\n' + 5); //
+							console.log(' -4\n' - 5);  //
+							console.log(!3 + 3 + '3' * '3' - '3' );//
+
+							console.log(true + false); //
+							console.log(null + 1); //
+							console.log(undefined + 1); //
+						</code></pre>
+						<p>Преобразование типов <a href="https://learn.javascript.ru/type-conversions">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">comparison</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							console.log(String("world") === "world"); //
+							console.log(['x'] == 'x' ); //
+							console.log(NaN == NaN); //
+							console.log(new Number(9) == 9); //
+							console.log(3 > 2 > 1);  //
+							console.log(null > 0); //
+							console.log(null == 0); //
+							console.log(null >= 0); //
+							console.log(null == undefined); //
+						</code></pre>
+						<p>Операторы сравнения <a href="https://learn.javascript.ru/comparison">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">logical operators</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							null && 12 //
+							null || 12 //
+							null ?? 12 //
+							1 && 12 //
+							1 || 12 //
+							'' ?? 12 //
+							console.log(1 || null || 0); //
+							console.log(1 && null && 0); //
+						</code></pre>
+						<p>Логические операторы <a href="https://learn.javascript.ru/logical-operators">https://learn.javascript.ru/</a>.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Destructuring</h2>
+					</section>
+					<section>
+						<h3 data-id="code-title">Деструктуризация -из массива numbers выбрать elem1, elem3 и все осатльные
+						</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							const numbers = [1, 5, 20, 10, 8б 56, 92];
+						</code></pre>
+						<p>Деструктуризация массива <a href="https://learn.javascript.ru/destructuring-assignment#destrukturizatsiya-massiva">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">Деструктуризация - из объекта data извлечь locale и url.
+						</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							const data = {
+								title: "Page title",
+								url: "localhost",
+								translations: {
+									country: "US",
+									locale:"en-us"
+								},
+							}
+						</code></pre>
+						<p>Деструктуризация объекта <a href="https://learn.javascript.ru/destructuring-assignment#destrukturizatsiya-obekta">https://learn.javascript.ru/</a>.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Closures, Currying, Recursion</h2>
+					</section>
+					<section>
+						<h3 data-id="code-title">Closures</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							function makeCounter() {
+  								let count = 0;
+
+	  							return function() {
+    								return count++;
+  								};
+							}
+
+							let counter = makeCounter();
+						</code></pre>
+						<p>Замыкание <a href="https://learn.javascript.ru/closure">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">Currying</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							function curry(f) { // curry(f) выполняет каррирование
+  								return function(a) {
+    								return function(b) {
+      									return f(a, b);
+    								};
+  								};
+							}
+
+							// использование
+							function sum(a, b) {
+  								return a + b;
+							}
+
+							let curriedSum = curry(sum);
+
+							alert( curriedSum(1)(2) ); // 3
+						</code></pre>
+						<p>Каррирование <a href="https://learn.javascript.ru/currying-partials">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">Recursion</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							function pow(x, n) {
+  								if (n == 1) {
+    								return x;
+  								} else {
+    								return x * pow(x, n - 1);
+  								}
+							}
+
+							alert( pow(2, 3) ); // 8
+						</code></pre>
+						<p>Рекурсия <a href="https://learn.javascript.ru/recursion">https://learn.javascript.ru/</a>.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Async JavaScript (Timers, Promise, Event Loop)</h2>
+					</section>
+					<section>
+						<h3 data-id="code-title">Timers</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							// повторить с интервалом 2 секунды
+							let timerId = setInterval(() => alert('tick'), 2000);
+
+							// остановить вывод через 5 секунд
+							setTimeout(() => { clearInterval(timerId); alert('stop'); }, 5000);
+						</code></pre>
+						<p>setTimeout и setInterval <a href="https://learn.javascript.ru/settimeout-setinterval">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">Promise</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							let promise = new Promise(function(resolve, reject) {
+	  							// эта функция выполнится автоматически, при вызове new Promise
+
+  								// через 1 секунду сигнализировать, что задача выполнена с результатом "done"
+  								setTimeout(() => resolve("done"), 1000);
+							});
+						</code></pre>
+						<p>Промисы
+							<a href="https://learn.javascript.ru/promise-basics">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">Event Loop</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							console.log('run')
+							setTimeout(function timeout() {
+								console.log('timeout');
+							}, 0);
+
+							let p = new Promise(function(resolve, reject) {
+    							console.log('create promise');
+    							resolve();
+							});
+
+							p.then(function(){
+    							console.log('resolve promise');
+							});
+
+							console.log('finish');
+						</code></pre>
+						<p>Микрозадачи <a href="https://learn.javascript.ru/https://learn.javascript.ru/microtask-queue">https://learn.javascript.ru/</a>.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Client Side JavaScript</h2>
+					</section>
+					<section>
+						<h3 data-id="code-title">Life collection</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							document.querySelectorAll('div')
+							document.getElementsByTagName('div')
+						</code></pre>
+					</section>
+					<section>
+						<h3 data-id="code-title">children, parent, sibling</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							<div class="neighborhood">
+    							<div class="neighbor-house"> </div>
+    							<div class="my-house" data-testattr="123" >
+        							<div class="living-room"> </div>
+        							<p class="bedroom"> </p>
+    							</div>
+    							text
+    							<div class="neighbor-house"> </div>
+							</div>
+
+							const myHouse = document.querySelector('.my-house')
+						</code></pre>
+					</section>
+					<section>
+						<h3 data-id="code-title">Event</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							elem.onClick = function(){console.log('1')};
+							elem.onClick = function(){console.log('2')};
+
+							function handleClick(e) {
+    							e.preventDefault()
+    							console.log('3')
+							}
+
+							elem.addEventListener( "click" , handleClick);
+							elem.addEventListener( "click" , () => console.log('4'));
+							elem.removeEventListener( "click", handleClick);
+							elem.removeEventListener( "click", () => console.log('4'));
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<h2>Спасибо за внимание</h2>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
