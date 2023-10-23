@@ -29,14 +29,14 @@
 					<ul>
 						<li>Data Types, Auto Type Conversions</li>
 						<li>Destructuring</li>
-						<li>Closures, Currying, Recursion</li>
-						<li>Async JavaScript (Timers, Promise, Event Loop)</li>
-						<li>Client Side JavaScript</li>
+						<li>Function</li>
+						<!--<li>Closures, Currying</li>
+						<li>Async JavaScript (Timers, Promise)</li>-->
 					</ul>
 				</section>
 				<section>
 					<section>
-						<h2>Data Types,</br>Auto Type Conversions</h2>
+						<h2>Data Types,<br>Auto Type Conversions</h2>
 					</section>
 					<section>
 						<h3 data-id="code-title">Data Types</h3>
@@ -55,13 +55,47 @@
 					<section>
 						<h3 data-id="code-title">typeof</h3>
 						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-							console.log(typeof `hello`); //
-							console.log(typeof 5); //
-							console.log(typeof []); //
-							console.log(typeof null); //
-							console.log(typeof NaN); //
-							console.log(typeof (() => {})); //
-							console.log(typeof typeof 5); //
+							console.log(typeof `hello`);
+							console.log(typeof 5);
+							console.log(typeof []);
+							console.log(typeof null);
+							console.log(typeof NaN);
+							console.log(typeof (() => {}));
+							console.log(typeof typeof 5);
+						</code></pre>
+					</section>
+					<section>
+						<h3 data-id="code-title">typeof</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							// Обычный синтаксис
+							typeof 5 // Выведет "number"
+							// Синтаксис, напоминающий вызов функции (встречается реже)
+							typeof(5) // Также выведет "number"
+						</code></pre>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							typeof undefined // "undefined"
+							typeof 0 // "number"
+							typeof 10n // "bigint"
+							typeof true // "boolean"
+							typeof "foo" // "string"
+							typeof Symbol("id") // "symbol"
+							typeof undefined // "undefined"
+							typeof Math // "object"
+							typeof null // "object"
+							typeof alert // "function"
+						</code></pre>
+						<p>Результатом вызова typeof null является "object". Это официально признанная ошибка в typeof, ведущая начало с времён создания JavaScript и сохранённая для совместимости. Конечно, null не является объектом. Это специальное значение с отдельным типом.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">typeof</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							console.log(typeof `hello`); // 'string'
+							console.log(typeof 5); // 'number'
+							console.log(typeof []); // 'object'
+							console.log(typeof null); // 'object'
+							console.log(typeof NaN); // 'number'
+							console.log(typeof (() => {})); // 'function'
+							console.log(typeof typeof 5); // 'string'
 						</code></pre>
 					</section>
 					<section>
@@ -86,6 +120,27 @@
 						<p>Преобразование типов <a href="https://learn.javascript.ru/type-conversions">https://learn.javascript.ru/</a>.</p>
 					</section>
 					<section>
+						<h3 data-id="code-title">AUTO TYPE CONVERSIONS</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							console.log('' + 10 + 0); // '100'
+							console.log('' - 10 + 0); // -10
+							console.log(6 / '3'); // 2
+							console.log('2' * '3'); // 6
+							console.log(4 + 5 + 'px'); // '45px'
+							console.log('$' + 4 + 5); // '$45'
+							console.log('4' - 2); // 2
+							console.log('4px' - 2); // NaN
+							console.log(' -4\n' + 5); // ' -4\n5'
+							console.log(' -4\n' - 5);  // -9
+							console.log(!3 + 3 + '3' * '3' - '3' );// 9
+
+							console.log(true + false); // 1
+							console.log(null + 1); // 1
+							console.log(undefined + 1); // NaN
+						</code></pre>
+						<p>Преобразование типов <a href="https://learn.javascript.ru/type-conversions">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
 						<h3 data-id="code-title">comparison</h3>
 						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
 							console.log(String("world") === "world"); //
@@ -101,16 +156,33 @@
 						<p>Операторы сравнения <a href="https://learn.javascript.ru/comparison">https://learn.javascript.ru/</a>.</p>
 					</section>
 					<section>
+						<h3 data-id="code-title">comparison</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							console.log(String("world") === "world"); // true
+							console.log(['x'] == 'x' ); // true
+							console.log(NaN == NaN); // false
+							console.log(new Number(9) == 9); // true
+							console.log(3 > 2 > 1);  // false
+							console.log(null > 0); // false
+							console.log(null == 0); // false
+							console.log(null >= 0); // true
+							console.log(null == undefined); // true
+						</code></pre>
+						<p>Операторы сравнения <a href="https://learn.javascript.ru/comparison">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
 						<h3 data-id="code-title">logical operators</h3>
 						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-							null && 12 //
-							null || 12 //
-							null ?? 12 //
-							1 && 12 //
-							1 || 12 //
-							'' ?? 12 //
 							console.log(1 || null || 0); //
 							console.log(1 && null && 0); //
+						</code></pre>
+						<p>Логические операторы <a href="https://learn.javascript.ru/logical-operators">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">logical operators</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							console.log(1 || null || 0); // 1
+							console.log(1 && null && 0); // null
 						</code></pre>
 						<p>Логические операторы <a href="https://learn.javascript.ru/logical-operators">https://learn.javascript.ru/</a>.</p>
 					</section>
@@ -123,7 +195,16 @@
 						<h3 data-id="code-title">Деструктуризация -из массива numbers выбрать elem1, elem3 и все осатльные
 						</h3>
 						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-							const numbers = [1, 5, 20, 10, 8б 56, 92];
+							const numbers = [1, 5, 20, 10, 8, 56, 92];
+						</code></pre>
+						<p>Деструктуризация массива <a href="https://learn.javascript.ru/destructuring-assignment#destrukturizatsiya-massiva">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">Деструктуризация -из массива numbers выбрать elem1, elem3 и все осатльные
+						</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							const numbers = [1, 5, 20, 10, 8, 56, 92];
+							let [elem1,,elem3,...rest] = numbers;
 						</code></pre>
 						<p>Деструктуризация массива <a href="https://learn.javascript.ru/destructuring-assignment#destrukturizatsiya-massiva">https://learn.javascript.ru/</a>.</p>
 					</section>
@@ -142,8 +223,93 @@
 						</code></pre>
 						<p>Деструктуризация объекта <a href="https://learn.javascript.ru/destructuring-assignment#destrukturizatsiya-obekta">https://learn.javascript.ru/</a>.</p>
 					</section>
+					<section>
+						<h3 data-id="code-title">Деструктуризация - из объекта data извлечь locale и url.
+						</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							const data = {
+								title: "Page title",
+								url: "localhost",
+								translations: {
+									country: "US",
+									locale:"en-us"
+								},
+							};
+							let { url, translation: { locale } } = data;
+						</code></pre>
+						<p>Деструктуризация объекта <a href="https://learn.javascript.ru/destructuring-assignment#destrukturizatsiya-obekta">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">Деструктуризация - из объекта data извлечь locale и url.
+						</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							const data = {
+								title: "Page title",
+								url: "localhost",
+								translations: {
+									country: "US",
+									locale:"en-us"
+								},
+							};
+							let { url: newUrl, translation: { locale } } = data;
+						</code></pre>
+						<p>Деструктуризация объекта <a href="https://learn.javascript.ru/destructuring-assignment#destrukturizatsiya-obekta">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">Деструктуризация - из объекта data извлечь locale и url.
+						</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							const data = {
+								title: "Page title",
+								url: "localhost",
+								translations: {
+									country: "US",
+									locale:"en-us"
+								},
+							};
+							let { url: newUrl = 'localhist', translation: { locale } } = data;
+						</code></pre>
+						<p>Деструктуризация объекта <a href="https://learn.javascript.ru/destructuring-assignment#destrukturizatsiya-obekta">https://learn.javascript.ru/</a>.</p>
+					</section>
 				</section>
 				<section>
+					<section>
+						<h3 data-id="code-title">Написать функцию для нахождения суммы двух чисел.
+						</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							function sum (num1, num2) {
+							    return num1 + num2;
+							}
+							sum(1, 2); // 3
+						</code></pre>
+						<p>Деструктуризация объекта <a href="https://learn.javascript.ru/destructuring-assignment#destrukturizatsiya-obekta">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">Если передаем тольео один параметр, то вернуть его значение.
+						</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							function sum (num1, num2) {
+							    return num1 + num2;
+							}
+							sum(1, 2); // 3
+							sum(1); // NaN
+						</code></pre>
+						<p>Деструктуризация объекта <a href="https://learn.javascript.ru/destructuring-assignment#destrukturizatsiya-obekta">https://learn.javascript.ru/</a>.</p>
+					</section>
+					<section>
+						<h3 data-id="code-title">Если передаем тольео один параметр, то вернуть его значение.
+						</h3>
+						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
+							function sum (num1, num2 = 0) {
+							    return num1 + num2;
+							}
+							sum(1, 2); // 3
+							sum(1); // 1
+						</code></pre>
+						<p>Деструктуризация объекта <a href="https://learn.javascript.ru/destructuring-assignment#destrukturizatsiya-obekta">https://learn.javascript.ru/</a>.</p>
+					</section>
+				</section>
+<!--				<section>
 					<section>
 						<h2>Closures, Currying, Recursion</h2>
 					</section>
@@ -202,7 +368,7 @@
 				</section>
 				<section>
 					<section>
-						<h2>Async JavaScript (Timers, Promise, Event Loop)</h2>
+						<h2>Async JavaScript (Timers, Promise)</h2>
 					</section>
 					<section>
 						<h3 data-id="code-title">Timers</h3>
@@ -228,73 +394,7 @@
 						<p>Промисы
 							<a href="https://learn.javascript.ru/promise-basics">https://learn.javascript.ru/</a>.</p>
 					</section>
-					<section>
-						<h3 data-id="code-title">Event Loop</h3>
-						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-							console.log('run')
-							setTimeout(function timeout() {
-								console.log('timeout');
-							}, 0);
-
-							let p = new Promise(function(resolve, reject) {
-    							console.log('create promise');
-    							resolve();
-							});
-
-							p.then(function(){
-    							console.log('resolve promise');
-							});
-
-							console.log('finish');
-						</code></pre>
-						<p>Микрозадачи <a href="https://learn.javascript.ru/https://learn.javascript.ru/microtask-queue">https://learn.javascript.ru/</a>.</p>
-					</section>
-				</section>
-				<section>
-					<section>
-						<h2>Client Side JavaScript</h2>
-					</section>
-					<section>
-						<h3 data-id="code-title">Life collection</h3>
-						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-							document.querySelectorAll('div')
-							document.getElementsByTagName('div')
-						</code></pre>
-					</section>
-					<section>
-						<h3 data-id="code-title">children, parent, sibling</h3>
-						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-							<div class="neighborhood">
-    							<div class="neighbor-house"> </div>
-    							<div class="my-house" data-testattr="123" >
-        							<div class="living-room"> </div>
-        							<p class="bedroom"> </p>
-    							</div>
-    							text
-    							<div class="neighbor-house"> </div>
-							</div>
-
-							const myHouse = document.querySelector('.my-house')
-						</code></pre>
-					</section>
-					<section>
-						<h3 data-id="code-title">Event</h3>
-						<pre data-id="code-animation"><code class="hljs javascript" data-trim data-line-numbers>
-							elem.onClick = function(){console.log('1')};
-							elem.onClick = function(){console.log('2')};
-
-							function handleClick(e) {
-    							e.preventDefault()
-    							console.log('3')
-							}
-
-							elem.addEventListener( "click" , handleClick);
-							elem.addEventListener( "click" , () => console.log('4'));
-							elem.removeEventListener( "click", handleClick);
-							elem.removeEventListener( "click", () => console.log('4'));
-						</code></pre>
-					</section>
-				</section>
+				</section>-->
 				<section>
 					<h2>Спасибо за внимание</h2>
 				</section>
